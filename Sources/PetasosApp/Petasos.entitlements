@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+        Hardened runtime resource access entitlements. Without these, macOS
+        silently denies the corresponding TCC requests before the user is ever
+        prompted — the symptoms are "app doesn't appear in Privacy & Security"
+        and "permission denied with no dialog."
+
+        We are NOT sandboxed (no com.apple.security.app-sandbox key). Petasos
+        needs full filesystem access for the HuggingFace cache, model downloads,
+        and arbitrary local hermes-agent endpoints; sandboxing would block all
+        of that. The hardened runtime gives us the security-hardening pieces
+        (DYLD protections, library validation) without sandbox restrictions.
+    -->
+
+    <!-- Microphone (Parakeet STT, voice loop). -->
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
+
+    <!-- Outbound network for hermes-agent, HuggingFace model downloads,
+         and any HTTP STT/TTS sidecar. -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+
+    <!-- Required for AVAudioEngine input nodes on some macOS versions,
+         even when only consuming audio. -->
+    <key>com.apple.security.device.microphone</key>
+    <true/>
+</dict>
+</plist>

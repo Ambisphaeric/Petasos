@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Swift / SwiftPM
+.build/
+.swiftpm/
+*.xcodeproj
+xcuserdata/
+DerivedData/
+
+# Dependency lockfile — uncomment if you want CI and collaborators to use
+# the exact same package versions. For a leaf app (not a library) it's
+# usually recommended to commit Package.resolved.
+# Package.resolved
+
+# Build artifacts
+build/
+*.dmg
+
+# Code coverage / profiling
+*.profraw
+*.profdata
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Env files (just in case)
+.env
+.env.*
+
+# Misc
+*.log
+*.tmp
+*.orig
+*.rej

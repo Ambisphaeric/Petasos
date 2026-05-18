@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: macos-14
+    permissions:
+      contents: write  # upload assets to the GitHub Release
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_16.app
+
+      - name: Import signing certificate
+        env:
+          CERT_P12_BASE64: ${{ secrets.PETASOS_CERT_P12 }}
+          CERT_PASSWORD: ${{ secrets.PETASOS_CERT_PASSWORD }}
+        run: |
+          set -euo pipefail
+          KEYCHAIN_PASSWORD="ci-temp-${{ github.run_id }}"
+          echo "$CERT_P12_BASE64" | base64 -d > cert.p12
+          security create-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+          security set-keychain-settings -lut 21600 build.keychain
+          security import cert.p12 -k build.keychain \
+            -P "$CERT_PASSWORD" \
+            -T /usr/bin/codesign
+          security set-key-partition-list \
+            -S apple-tool:,apple:,codesign: \
+            -s -k "$KEYCHAIN_PASSWORD" build.keychain
+          rm cert.p12
+
+      - name: Build Petasos.app
+        env:
+          PETASOS_SIGN_IDENTITY: ${{ secrets.PETASOS_SIGN_IDENTITY }}
+        run: ./scripts/build-app.sh
+
+      - name: Package DMG
+        run: ./scripts/package-dmg.sh
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/Petasos-*.dmg
+          generate_release_notes: true

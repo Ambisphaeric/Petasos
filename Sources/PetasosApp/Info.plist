@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.petasos</string>
+    <key>CFBundleName</key>
+    <string>Petasos</string>
+    <key>CFBundleDisplayName</key>
+    <string>Petasos</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.3.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleExecutable</key>
+    <string>Petasos</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>14.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Petasos needs microphone access to transcribe your speech for the hermes-agent companion. Audio is processed locally via on-device Parakeet (MLX) by default, never sent to a third party unless you switch to the HTTP backend in Settings.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Petasos talks to your hermes-agent server, which may be running on this Mac or another machine on your local network. No data is sent anywhere else.</string>
+    <key>NSAudioCaptureUsageDescription</key>
+    <string>Petasos can capture system audio so transcription and Claude's responses can account for what's playing on your Mac. Audio is processed on-device by default and never leaves your machine unless you enable an HTTP transcription backend.</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Petasos — accessibility-first companion for hermes-agent.</string>
+</dict>
+</plist>
