@@ -6,14 +6,14 @@ Built for deaf and blind users, useful for everyone. Low-latency on-device STT (
 
 ## Status
 
-**P0 — Skeleton & onboarding.** Menu bar shell, server auto-discovery, bearer-token onboarding, `/v1/capabilities` + `/v1/models` probe, Keychain credential storage. No chat, no voice, no overlays yet.
+**P0–P2 are complete.** Menu bar shell, onboarding, chat streaming, and the full on-device voice loop (STT + TTS) are shipped. Work is now focused on overlays and polish.
 
 | Phase | Status | Scope |
 |---|---|---|
-| **P0 — Skeleton & onboarding** | in progress | menu bar + onboarding wizard + capability probe |
-| **P1 — Chat core + streaming** | not started | SSE token streaming + popover chat |
-| **P2 — Voice loop** | not started | Parakeet STT + Kokoro TTS, PTT + always-listening + wake word |
-| **P3 — Overlay engine + 3 modes** | not started | pluggable overlay framework |
+| **P0 — Skeleton & onboarding** | ✅ done | menu bar + onboarding wizard + capability probe |
+| **P1 — Chat core + streaming** | ✅ done | SSE token streaming + popover chat |
+| **P2 — Voice loop** | ✅ done | Parakeet STT + Kokoro TTS, PTT + always-listening + wake word |
+| **P3 — Overlay engine + 3 modes** | in progress | pluggable overlay framework |
 | **P4 — Primitives & polish** | not started | shorthand expander, screenshot vision, settings panel |
 
 ## Install
